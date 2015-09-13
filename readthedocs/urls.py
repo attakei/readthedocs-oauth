@@ -58,8 +58,13 @@ django_urls = patterns(
 
 money_urls = patterns(
     '',
-    url(r'^sustainability/', include('readthedocs.donate.urls')),
     url(r'^accounts/gold/', include('readthedocs.gold.urls')),
+    url(r'^sustainability/', include('readthedocs.donate.urls')),
+)
+
+oauth_urls = patterns(
+    '',
+    url(r'social/', include('social_auth.urls')),
 )
 
 urlpatterns += docs_urls
@@ -69,6 +74,8 @@ urlpatterns += core_urls
 urlpatterns += django_urls
 urlpatterns += money_urls
 urlpatterns += deprecated_urls
+urlpatterns += oauth_urls
+
 
 if settings.DEBUG:
     urlpatterns += patterns(

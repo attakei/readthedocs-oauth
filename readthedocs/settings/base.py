@@ -119,11 +119,17 @@ MIDDLEWARE_CLASSES = (
 )
 
 AUTHENTICATION_BACKENDS = (
+    'social_auth.backends.google.GoogleOAuth2Backend',
+    'social_auth.backends.google.GoogleBackend',
     # Needed to login by username in Django admin, regardless of `allauth`
     "django.contrib.auth.backends.ModelBackend",
     # `allauth` specific authentication methods, such as login by e-mail
     "allauth.account.auth_backends.AuthenticationBackend",
 )
+
+# Google Oauth2
+GOOGLE_OAUTH2_CLIENT_ID      = 'Your_client_id'
+GOOGLE_OAUTH2_CLIENT_SECRET  = 'Your_client_secret'
 
 # All auth
 
@@ -217,6 +223,9 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.github',
     'allauth.socialaccount.providers.bitbucket',
     # 'allauth.socialaccount.providers.twitter',
+
+    # Auth by Oauth
+    'social_auth',
 ]
 
 REST_FRAMEWORK = {
@@ -250,6 +259,7 @@ CELERY_ROUTES = {
 DEFAULT_FROM_EMAIL = "no-reply@readthedocs.org"
 SERVER_EMAIL = DEFAULT_FROM_EMAIL
 SESSION_COOKIE_DOMAIN = 'readthedocs.org'
+SESSION_SERIALIZER = 'readthedocs.core.signing.CustomJSONSerializer'
 
 HAYSTACK_CONNECTIONS = {
     'default': {
